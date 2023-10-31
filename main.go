@@ -94,10 +94,14 @@ func writeFile(filename string, data []byte) error {
 
 func main() {
 	// Define flags
+	envAuthToken := os.Getenv("CELESTIA_NODE_AUTH_TOKEN")
 	mode := flag.String("mode", "read", "Mode of operation: read or write")
 	filename := flag.String("file", "", "Path to the file")
 	commitment := flag.String("commitment", "", "commitment for the blob")
+	namespace := flag.String("namespace", "000008e5f679bf7116cb", "target namespace")
+	authArg := flag.String("auth", "", "auth token (default is $CELESTIA_NODE_AUTH_TOKEN)")
 	height := flag.Uint64("height", 0, "celestia height to fetch a blob from")
+
 	flag.Parse()
 
 	// Check if filename is provided
@@ -106,11 +110,21 @@ func main() {
 		return
 	}
 
+	var auth string
+	auth = envAuthToken
+	if auth == "" {
+		if *authArg == "" {
+			fmt.Println("Please supply an auth token")
+			return
+		}
+		auth = *authArg
+	}
+
 	// Start Celestia DA
 	daConfig := DAConfig{
 		Rpc:         "http://localhost:26658",
-		NamespaceId: "000008e5f679bf7116cb",
-		AuthToken:   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJwdWJsaWMiLCJyZWFkIiwid3JpdGUiLCJhZG1pbiJdfQ.ViLFYuzGM5poLepjlx0NCVB94-antnRu7_o1Vw2cX_0",
+		NamespaceId: *namespace,
+		AuthToken:   auth,
 	}
 
 	celestiaDA, err := NewCelestiaDA(daConfig)
