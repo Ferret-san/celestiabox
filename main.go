@@ -94,37 +94,31 @@ func writeFile(filename string, data []byte) error {
 
 func main() {
 	// Define flags
-	envAuthToken := os.Getenv("CELESTIA_NODE_AUTH_TOKEN")
-	mode := flag.String("mode", "read", "Mode of operation: read or write")
+	mode := flag.String("mode", "submit", "Mode of operation: read or write")
 	filename := flag.String("file", "", "Path to the file")
 	commitment := flag.String("commitment", "", "commitment for the blob")
 	namespace := flag.String("namespace", "000008e5f679bf7116cb", "target namespace")
-	authArg := flag.String("auth", "", "auth token (default is $CELESTIA_NODE_AUTH_TOKEN)")
+	auth := flag.String("auth", "", "auth token (default is $CELESTIA_NODE_AUTH_TOKEN)")
 	height := flag.Uint64("height", 0, "celestia height to fetch a blob from")
 
 	flag.Parse()
+
+	// Check if filename is provided
+	if *auth == "" {
+		fmt.Println("Please supply auth token")
+		return
+	}
 
 	// Check if filename is provided
 	if *filename == "" {
 		fmt.Println("Please provide a filename using -file=<filename>")
 		return
 	}
-
-	var auth string
-	auth = envAuthToken
-	if auth == "" {
-		if *authArg == "" {
-			fmt.Println("Please supply an auth token")
-			return
-		}
-		auth = *authArg
-	}
-
 	// Start Celestia DA
 	daConfig := DAConfig{
 		Rpc:         "http://localhost:26658",
 		NamespaceId: *namespace,
-		AuthToken:   auth,
+		AuthToken:   *auth,
 	}
 
 	celestiaDA, err := NewCelestiaDA(daConfig)
@@ -134,7 +128,7 @@ func main() {
 	}
 
 	switch *mode {
-	case "read":
+	case "submit":
 		data, err := readFile(*filename)
 		if err != nil {
 			fmt.Println("Error reading file:", err)
@@ -151,7 +145,7 @@ func main() {
 		fmt.Println("Succesfully submitted blob to Celestia")
 		fmt.Println("Height: ", height)
 		fmt.Println("Commitment string: ", hex.EncodeToString(commitment))
-	case "write":
+	case "read":
 		if *commitment == "" {
 			fmt.Println("Please provide commitment using -commitment=<commitment>")
 			return
