@@ -23,7 +23,4 @@ With the height and commitment string, you can read from the data blob at the gi
 go run main.go -mode=read -file=<file> -namespace=<namespace> -auth=<auth token> -commitment=<hex sting of PFB commitment> -height=<height>
 ```
 
-This will create the file in the repo's directory with whatever file extension you give it. So if you uploaded a `.jpeg`, make sure you write the data into a file with that file extension, and that you tell ot
-
-
-hers the file extension needed, or have them figure it out :)
+This will create the file in the repo's directory with whatever file extension you give it. So if you uploaded a `.jpeg`, make sure you write the data into a file with that file extension, and that you tell others the file extension needed, or have them figure it out :)
