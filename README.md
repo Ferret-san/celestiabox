@@ -45,7 +45,7 @@ This will create the file in the repo's directory with whatever file extension y
 Here's an example!
 
 ```sh
-go run main.go -mode=read -file=joshcs.png \
+go run main.go -mode=read -file=diego.png \
     -namespace=0000000000004a6f7368 -auth=$AUTH_TOKEN \
     -commitment=15c4d44e62c098634fa2ccb57d1c2e690cd6e42b1b61d73c41150e57ec193658 \
     -height=82764
