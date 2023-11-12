@@ -46,7 +46,7 @@ Here's an example!
 
 ```sh
 go run main.go -mode=read -file=celestia.png \
-    -namespace=0000000000004a6f7368 -auth=$AUTH_TOKEN \
+    -namespace=4a6f7368 -auth=$AUTH_TOKEN \
     -commitment=2c6dd5a6b8aee296248b150f31a4ae5612ed4d874a3cfa61b623cc03e5a81caf \
     -height=85242
 ```
@@ -54,9 +54,9 @@ go run main.go -mode=read -file=celestia.png \
 The output will look similar to below:
 
 ```sh
-Requesting data from Celestia namespace 0000000000004a6f7368 commitment �NbcO̵}.i
+Requesting data from Celestia namespace 4a6f7368 commitment �NbcO̵}.i
       �+�AW�6X height 82764
-Succesfully fetched data from Celestia namespace 0000000000004a6f7368 height 85242 commitment �NbcO̵}.i
+Succesfully fetched data from Celestia namespace 4a6f7368 height 85242 commitment �NbcO̵}.i
                             �+�AW�6X
 File written successfully!
 ```
