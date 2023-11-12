@@ -45,10 +45,10 @@ This will create the file in the repo's directory with whatever file extension y
 Here's an example!
 
 ```sh
-go run main.go -mode=read -file=diego.png \
+go run main.go -mode=read -file=celestia.png \
     -namespace=0000000000004a6f7368 -auth=$AUTH_TOKEN \
-    -commitment=15c4d44e62c098634fa2ccb57d1c2e690cd6e42b1b61d73c41150e57ec193658 \
-    -height=82764
+    -commitment=2c6dd5a6b8aee296248b150f31a4ae5612ed4d874a3cfa61b623cc03e5a81caf \
+    -height=85242
 ```
 
 The output will look similar to below:
@@ -56,7 +56,7 @@ The output will look similar to below:
 ```sh
 Requesting data from Celestia namespace 0000000000004a6f7368 commitment �NbcO̵}.i
       �+�AW�6X height 82764
-Succesfully fetched data from Celestia namespace 0000000000004a6f7368 height 82764 commitment �NbcO̵}.i
+Succesfully fetched data from Celestia namespace 0000000000004a6f7368 height 85242 commitment �NbcO̵}.i
                             �+�AW�6X
 File written successfully!
 ```
